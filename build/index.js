@@ -1,15 +1,12 @@
-function brainLuck(code: string, inputStr: string) {
-    const data = Array(5000).fill(0) as Array<number>;
+"use strict";
+function brainLuck(code, inputStr) {
+    const data = Array(5000).fill(0);
     const brackets = bracketsMap(code);
-
     let ip = 0;
     let address = 0;
-
     const input = [...inputStr].map((char) => char.charCodeAt(0));
     let output = "";
-
     let exit = false;
-
     while (ip < code.length && address < 5000 && exit === false) {
         switch (code[ip]) {
             case ">":
@@ -20,22 +17,26 @@ function brainLuck(code: string, inputStr: string) {
                 break;
             case "+":
                 data[address]++;
-                if (data[address] > 255) data[address] = 0;
+                if (data[address] > 255)
+                    data[address] = 0;
                 break;
             case "-":
                 data[address]--;
-                if (data[address] < 0) data[address] = 255;
+                if (data[address] < 0)
+                    data[address] = 255;
                 break;
             case "[":
                 if (data[address] === 0) {
                     const temp = brackets.get(ip);
-                    if (temp) ip = temp;
+                    if (temp)
+                        ip = temp;
                 }
                 break;
             case "]":
                 if (data[address] !== 0) {
                     const temp = [...brackets].find(([_, val]) => val === ip);
-                    if (temp) ip = temp[0];
+                    if (temp)
+                        ip = temp[0];
                 }
                 break;
             case ",":
@@ -50,12 +51,11 @@ function brainLuck(code: string, inputStr: string) {
     }
     return output;
 }
-
-function bracketsMap(code: string): Map<number, number> {
-    const brackets: Map<number, number> = new Map();
-
+function bracketsMap(code) {
+    const brackets = new Map();
     for (let i = 0; i < code.length; i++) {
-        if (code[i] === "[") brackets.set(i, -1);
+        if (code[i] === "[")
+            brackets.set(i, -1);
         if (code[i] === "]") {
             let found = false;
             let temp = i;
@@ -70,36 +70,11 @@ function bracketsMap(code: string): Map<number, number> {
     console.log(brackets);
     return brackets;
 }
-
 console.log("1 ", brainLuck(",+[-.,+]", "Codewars"), "\n");
-
-console.log(
-    "2 ",
-    brainLuck(",+[-.,+]", "Codewars" + String.fromCharCode(255)),
-    "\n"
-);
-
+console.log("2 ", brainLuck(",+[-.,+]", "Codewars" + String.fromCharCode(255)), "\n");
 console.log("3 ", brainLuck(",[.[-],]", "oktreta"), "\n");
-
-console.log(
-    "4 ",
-    brainLuck(",>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.", String.fromCharCode(8, 9)),
-    "\n"
-);
+console.log("4 ", brainLuck(",>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.", String.fromCharCode(8, 9)), "\n");
 console.log("5 ", brainLuck(",[.[-],]", ""), "\n");
-
-console.log(
-    "6 ",
-    brainLuck(
-        ">+++++++++[<++++++++>-]<.>+++++++[<++++>-]<+.+++++++..+++.[-]>++++++++[<++++>-] <.>+++++++++++[<++++++++>-]<-.--------.+++.------.--------.[-]>++++++++[<++++>- ]<+.[-]++++++++++.",
-        "ola"
-    )
-);
-
-console.log(
-    "7 ",
-    brainLuck(
-        "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++.>+++++++++++++++.>.+++.------.--------.<<+.<.",
-        ""
-    )
-);
+console.log("6 ", brainLuck(">+++++++++[<++++++++>-]<.>+++++++[<++++>-]<+.+++++++..+++.[-]>++++++++[<++++>-] <.>+++++++++++[<++++++++>-]<-.--------.+++.------.--------.[-]>++++++++[<++++>- ]<+.[-]++++++++++.", "ola"));
+console.log("7 ", brainLuck("++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++.>+++++++++++++++.>.+++.------.--------.<<+.<.", ""));
+//# sourceMappingURL=index.js.map

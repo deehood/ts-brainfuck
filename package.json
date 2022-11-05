@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "tsc": "tsc",
-        "dev": "ts-node-dev index.ts",
+        "tsc": "tsc ./src/",
+        "dev": "ts-node-dev ./src/index.ts",
         "lint": "eslint --ext .ts ."
     },
     "keywords": [],
